@@ -3,7 +3,13 @@ package com.in28minutes.rest.webservices.restfulwebservices.user;
 
 
 import java.util.Date;
+import java.util.List;
 
+import javax.annotation.Generated;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
@@ -15,8 +21,11 @@ import io.swagger.annotations.ApiModelProperty;
 
 
 @ApiModel(description = "All Details about the model")
+@Entity
 public class User {
 	
+	@Id
+	@GeneratedValue
 	
 	private Integer id;
 	
@@ -25,10 +34,10 @@ public class User {
 	
 	@Past
 	@ApiModelProperty(notes= "birth day sould not be in the past ")
-	private Date birsthDate;
+	private Date birthdate;
 	
-	
-	
+	@OneToMany(mappedBy = "user")
+	private List<Posts> post ;
 	
 	protected User()
 	{
@@ -39,7 +48,7 @@ public class User {
 		super();
 		this.id = id;
 		this.name = name;
-		this.birsthDate = birsthDate;
+		this.birthdate = birsthDate;
 	}
 	
 	public Integer getId() {
@@ -55,14 +64,33 @@ public class User {
 		this.name = name;
 	}
 	public Date getBirsthDate() {
-		return birsthDate;
+		return birthdate;
 	}
 	public void setBirsthDate(Date birsthDate) {
-		this.birsthDate = birsthDate;
+		this.birthdate = birsthDate;
 	}
+	
+	
+	
+	public Date getBirthdate() {
+		return birthdate;
+	}
+
+	public void setBirthdate(Date birthdate) {
+		this.birthdate = birthdate;
+	}
+
+	public List<Posts> getPost() {
+		return post;
+	}
+
+	public void setPost(List<Posts> post) {
+		this.post = post;
+	}
+
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", birsthDate=" + birsthDate + "]";
+		return "User [id=" + id + ", name=" + name + ", birsthDate=" + birthdate + "]";
 	}
 	
 	
